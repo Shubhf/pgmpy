@@ -1,7 +1,9 @@
 import pandas as pd
 
 
-def from_sktime_to_dbn(df: pd.DataFrame, instance_col: str | None = None) -> pd.DataFrame:
+def from_sktime_to_dbn(
+    df: pd.DataFrame, instance_col: str | None = None
+) -> pd.DataFrame:
     """Convert sktime style time series data to DBN data format.
 
     Parameters
@@ -82,5 +84,9 @@ def from_dbn_to_sktime(dbn_data: pd.DataFrame) -> pd.DataFrame:
             rows.append([row[(var, t)] for var in variables])
             index.append((inst, t))
 
-    result = pd.DataFrame(rows, columns=variables, index=pd.MultiIndex.from_tuples(index, names=["instance", "time"]))
+    result = pd.DataFrame(
+        rows,
+        columns=variables,
+        index=pd.MultiIndex.from_tuples(index, names=["instance", "time"]),
+    )
     return result
